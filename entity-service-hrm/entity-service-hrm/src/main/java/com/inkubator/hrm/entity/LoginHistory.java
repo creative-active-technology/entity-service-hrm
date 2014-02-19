@@ -18,8 +18,6 @@ import javax.persistence.TemporalType;
     ,catalog="hrm"
 )
 public class LoginHistory  implements java.io.Serializable {
-
-
      private long id;
      private String userName;
      private Date loginDate;
@@ -103,6 +101,11 @@ public class LoginHistory  implements java.io.Serializable {
     
     public void setBahasa(String bahasa) {
         this.bahasa = bahasa;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginHistory{" + "id=" + id + ", userName=" + userName + ", loginDate=" + loginDate + ", logOutDate=" + logOutDate + ", ipAddress=" + ipAddress + ", bahasa=" + bahasa + '}';
     }
 
 

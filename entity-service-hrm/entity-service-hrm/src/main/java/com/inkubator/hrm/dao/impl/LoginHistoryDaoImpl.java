@@ -11,14 +11,11 @@ import com.inkubator.hrm.entity.LoginHistory;
 import com.inkubator.hrm.web.search.LoginHistorySearchParameter;
 import java.util.Date;
 import java.util.List;
-import org.apache.commons.lang3.time.DateUtils;
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
@@ -38,7 +35,8 @@ public class LoginHistoryDaoImpl extends IDAOImpl<LoginHistory> implements Login
     }
 
     @Override
-    public List<LoginHistory> getByParam(LoginHistorySearchParameter searchParameter, int firstResult, int maxResults, Order order) {
+    public List<LoginHistory> getByParam(LoginHistorySearchParameter searchParameter, final int firstResult, final int maxResults, Order order) {
+        System.out.println(" Ini nilai "+firstResult+"sdfsfdsf "+maxResults);
         Criteria criteria = getCurrentSession().createCriteria(getEntityClass());
         doSearchLoginHistoryByParam(searchParameter, criteria);
         criteria.addOrder(order);
@@ -59,6 +57,28 @@ public class LoginHistoryDaoImpl extends IDAOImpl<LoginHistory> implements Login
             criteria.add(Restrictions.like("userName", loginHistorySearchParameter.getUserName(), MatchMode.ANYWHERE));
         }
         criteria.add(Restrictions.isNotNull("id"));
+    }
+
+    @Override
+    public Long getTotalLogin() {
+        Criteria criteria = getCurrentSession().createCriteria(getEntityClass());
+        return (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+
+    }
+
+    @Override
+    public Long getTotalLoginByParam(Date dateFrom, Date dateUntil) {
+        Criteria criteria = getCurrentSession().createCriteria(getEntityClass());
+        criteria.add(Restrictions.between("loginDate", dateFrom, dateUntil));
+        return (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+    }
+
+    @Override
+    public Long getTotalLoginByParam(String userId, Date dateFrom, Date dateUntil) {
+        Criteria criteria = getCurrentSession().createCriteria(getEntityClass());
+        criteria.add(Restrictions.between("loginDate", dateFrom, dateUntil));
+        criteria.add(Restrictions.eq("userName", userId));
+        return (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
     }
 
 }

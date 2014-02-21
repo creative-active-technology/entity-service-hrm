@@ -37,21 +37,34 @@ public class LoginHistoryLazyModel extends LazyDataModel<LoginHistory> implement
     @Override
     public List<LoginHistory> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, String> filters) {
         LOGGER.info("Step Load Lazy data Model");
-        try {
-            if (sortField != null) {
-                if (sortOrder == SortOrder.ASCENDING) {
+
+        if (sortField != null) {
+            if (sortOrder == SortOrder.ASCENDING) {
+                try {
                     loginHistorys = loginHistoryService.getByParam(loginHistorySearchParameter, first, pageSize, Order.asc(sortField));
-                } else {
-                    loginHistorys = loginHistoryService.getByParam(loginHistorySearchParameter, first, pageSize, Order.desc(sortField));
+                    jumlahData = Integer.parseInt(String.valueOf(loginHistoryService.getTotalLoginHistoryByParam(loginHistorySearchParameter)));
+                } catch (Exception ex) {
+                    LOGGER.error("Error", ex);
                 }
             } else {
-                loginHistorys = loginHistoryService.getByParam(loginHistorySearchParameter, first, pageSize, Order.desc("loginDate"));
+                try {
+                    loginHistorys = loginHistoryService.getByParam(loginHistorySearchParameter, first, pageSize, Order.desc(sortField));
+                    jumlahData = Integer.parseInt(String.valueOf(loginHistoryService.getTotalLoginHistoryByParam(loginHistorySearchParameter)));
+                } catch (Exception ex) {
+                    LOGGER.error("Error", ex);
+                }
             }
-            jumlahData = Integer.parseInt(String.valueOf(loginHistoryService.getTotalLoginHistoryByParam(loginHistorySearchParameter)));
-            LOGGER.info("Success Load Lazy data Model");
-        } catch (Exception ex) {
-            LOGGER.error("Error", ex);
+        } else {
+            try {
+                loginHistorys = loginHistoryService.getByParam(loginHistorySearchParameter, first, pageSize, Order.desc("loginDate"));
+                jumlahData = Integer.parseInt(String.valueOf(loginHistoryService.getTotalLoginHistoryByParam(loginHistorySearchParameter)));
+            } catch (Exception ex) {
+                LOGGER.error("Error", ex);
+            }
         }
+//            jumlahData = Integer.parseInt(String.valueOf(loginHistoryService.getTotalLoginHistoryByParam(loginHistorySearchParameter)));
+        LOGGER.info("Success Load Lazy data Model");
+
         setPageSize(pageSize);
         setRowCount(jumlahData);
         return loginHistorys;

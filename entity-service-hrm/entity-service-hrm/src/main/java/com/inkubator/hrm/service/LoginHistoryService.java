@@ -7,7 +7,9 @@ package com.inkubator.hrm.service;
 
 import com.inkubator.datacore.service.IService;
 import com.inkubator.hrm.entity.LoginHistory;
+import com.inkubator.hrm.web.model.LoginHistoryChartModel;
 import com.inkubator.hrm.web.search.LoginHistorySearchParameter;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.criterion.Order;
 
@@ -21,4 +23,17 @@ public interface LoginHistoryService extends IService<LoginHistory> {
     public List<LoginHistory> getByParam(LoginHistorySearchParameter searchParameter, int firstResult, int maxResults, Order order) throws Exception;
 
     public Long getTotalLoginHistoryByParam(LoginHistorySearchParameter searchParameter) throws Exception;
+
+    public Long getTotalLogin() throws Exception;
+
+    public Long getToalLoginThisYear() throws Exception;
+
+    public Long getTotalLoginThisMonth() throws Exception;
+
+    public Long getTotalLoginThisWeek() throws Exception;
+
+    public Long getTotalLoginThisDay() throws Exception;
+
+    public List<LoginHistoryChartModel> getHistoryChartModel(Date dateFrom, Date dataUntil) throws Exception;
+
 }

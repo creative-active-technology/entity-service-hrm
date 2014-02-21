@@ -7,7 +7,9 @@ package com.inkubator.hrm.dao;
 
 import com.inkubator.datacore.dao.IDAO;
 import com.inkubator.hrm.entity.LoginHistory;
+import com.inkubator.hrm.web.model.LoginHistoryChartModel;
 import com.inkubator.hrm.web.search.LoginHistorySearchParameter;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.criterion.Order;
 
@@ -23,5 +25,11 @@ public interface LoginHistoryDao extends IDAO<LoginHistory> {
             int firstResult, int maxResults, Order order);
 
     public Long getTotalLoginHistoryByParam(LoginHistorySearchParameter searchParameter);
+
+    public Long getTotalLogin();
+
+    public Long getTotalLoginByParam(Date dateFrom, Date dateUntil);
+
+    public Long getTotalLoginByParam(String userId, Date dateFrom, Date dateUntil);
 
 }

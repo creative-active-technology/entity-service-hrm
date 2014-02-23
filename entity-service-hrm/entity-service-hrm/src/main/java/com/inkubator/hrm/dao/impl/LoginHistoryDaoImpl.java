@@ -36,7 +36,7 @@ public class LoginHistoryDaoImpl extends IDAOImpl<LoginHistory> implements Login
 
     @Override
     public List<LoginHistory> getByParam(LoginHistorySearchParameter searchParameter, final int firstResult, final int maxResults, Order order) {
-        System.out.println(" Ini nilai "+firstResult+"sdfsfdsf "+maxResults);
+    
         Criteria criteria = getCurrentSession().createCriteria(getEntityClass());
         doSearchLoginHistoryByParam(searchParameter, criteria);
         criteria.addOrder(order);

@@ -14,5 +14,5 @@ import com.inkubator.hrm.entity.PasswordComplexity;
  * @author Deni Husni FR
  */
 public interface PasswordComplexityDao extends IDAO<PasswordComplexity>{
-    
+    public PasswordComplexity getByCode(String code);
 }

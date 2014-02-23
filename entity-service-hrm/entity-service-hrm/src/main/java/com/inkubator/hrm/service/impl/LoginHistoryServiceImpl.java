@@ -180,8 +180,6 @@ public class LoginHistoryServiceImpl extends IServiceImpl implements LoginHistor
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS,
             isolation = Isolation.REPEATABLE_READ, timeout = 50)
     public List<LoginHistory> getByParam(LoginHistorySearchParameter searchParameter, int firstResult, int maxResults, Order order) throws Exception {
-        System.out.println(" skdfdskjfdsjfkdsjfdskfdkjf");
-        System.out.println("Ha "+firstResult+" "+maxResults);
         return this.loginHistoryDao.getByParam(searchParameter, firstResult, maxResults, order);
     }
 
@@ -232,6 +230,7 @@ public class LoginHistoryServiceImpl extends IServiceImpl implements LoginHistor
             isolation = Isolation.READ_COMMITTED, timeout = 30)
     public Long getTotalLoginThisWeek() throws Exception {
         String day = new SimpleDateFormat("EE", Locale.ENGLISH).format(new Date());
+        Date firtstDateOfWeek = null;
         int factorPengurang;
         if (day.equalsIgnoreCase("Sun")) {
             factorPengurang = 0;
@@ -248,7 +247,16 @@ public class LoginHistoryServiceImpl extends IServiceImpl implements LoginHistor
         } else {
             factorPengurang = -6;
         }
-        Date firtstDateOfWeek = DateTimeUtil.getDateFrom(new Date(), factorPengurang, CommonUtilConstant.DATE_FORMAT_DAY);
+        if (factorPengurang == 0) {
+            String justDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+            try {
+                firtstDateOfWeek = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").parse(justDate + " 00:00:00");
+            } catch (ParseException ex) {
+                LOGGER.error("Error", ex);
+            }
+        } else {
+            firtstDateOfWeek = DateTimeUtil.getDateFrom(new Date(), factorPengurang, CommonUtilConstant.DATE_FORMAT_DAY);
+        }
         return this.loginHistoryDao.getTotalLoginByParam(firtstDateOfWeek, new Date());
     }
 
@@ -269,12 +277,12 @@ public class LoginHistoryServiceImpl extends IServiceImpl implements LoginHistor
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS,
             isolation = Isolation.REPEATABLE_READ, timeout = 50)
-    public List<LoginHistoryChartModel> getHistoryChartModel(Date dateFrom, Date dataUntil) throws Exception {
+    public List<LoginHistoryChartModel> getHistoryChartModel(LoginHistorySearchParameter loginHistorySearchParameter, Date dateFrom, Date dataUntil) throws Exception {
         LoginHistoryChartModel loginHistoryChartModel = new LoginHistoryChartModel();
-        DateTime  dateTime=new DateTime();
-        Date today=new Date();
-        String bulanIni=new SimpleDateFormat("MMMM").format(today);
-        
+        DateTime dateTime = new DateTime();
+        Date today = new Date();
+        String bulanIni = new SimpleDateFormat("MMMM").format(today);
+
         return null;
     }
 }

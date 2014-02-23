@@ -34,6 +34,6 @@ public interface LoginHistoryService extends IService<LoginHistory> {
 
     public Long getTotalLoginThisDay() throws Exception;
 
-    public List<LoginHistoryChartModel> getHistoryChartModel(Date dateFrom, Date dataUntil) throws Exception;
+    public List<LoginHistoryChartModel> getHistoryChartModel(LoginHistorySearchParameter loginHistorySearchParameter, Date dateFrom, Date dataUntil) throws Exception;
 
 }

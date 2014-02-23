@@ -25,177 +25,193 @@ import org.springframework.transaction.annotation.Transactional;
 @Service(value = "passwordComplexityService")
 @Lazy
 public class PasswordComplexityServiceImpl extends IServiceImpl implements PasswordComplexityService {
-
+    
     @Autowired
     private PasswordComplexityDao passwordComplexityDao;
-
+    
     @Override
     public PasswordComplexity getEntiyByPK(String id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntiyByPK(Integer id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntiyByPK(Long id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED,
             propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void save(PasswordComplexity entity) throws Exception {
         this.passwordComplexityDao.save(entity);
     }
-
+    
     @Override
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED,
+            propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void update(PasswordComplexity entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PasswordComplexity passwordComplexity = this.passwordComplexityDao.getByCode(entity.getCode());
+        passwordComplexity.setEmailNotification(entity.getEmailNotification());
+        passwordComplexity.setExpiredPeriod(entity.getExpiredPeriod());
+        passwordComplexity.setHasLowerCase(entity.getHasLowerCase());
+        passwordComplexity.setHasNumber(entity.getHasNumber());
+        passwordComplexity.setHasSpecialCharacter(entity.getHasSpecialCharacter());
+        passwordComplexity.setHasUpperCase(entity.getHasUpperCase());
+        passwordComplexity.setMaxCharacter(entity.getMaxCharacter());
+        passwordComplexity.setMinCharacter(entity.getMinCharacter());
+        passwordComplexity.setNotificationPeriod(entity.getNotificationPeriod());
+        passwordComplexity.setPasswordMustDifferent(entity.getPasswordMustDifferent());
+        passwordComplexity.setSmsNotification(entity.getSmsNotification());
+        passwordComplexity.setUpdatedBy(entity.getUpdatedBy());
+        passwordComplexity.setUpdatedOn(entity.getUpdatedOn());
+        this.passwordComplexityDao.update(passwordComplexity);
     }
-
+    
     @Override
     public void saveOrUpdate(PasswordComplexity enntity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity saveData(PasswordComplexity entity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity updateData(PasswordComplexity entity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity saveOrUpdateData(PasswordComplexity entity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntityByPkIsActive(String id, Integer isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntityByPkIsActive(String id, Byte isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntityByPkIsActive(String id, Boolean isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntityByPkIsActive(Integer id, Integer isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntityByPkIsActive(Integer id, Byte isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntityByPkIsActive(Integer id, Boolean isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntityByPkIsActive(Long id, Integer isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntityByPkIsActive(Long id, Byte isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public PasswordComplexity getEntityByPkIsActive(Long id, Boolean isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void delete(PasswordComplexity entity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void softDelete(PasswordComplexity entity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public Long getTotalData() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public Long getTotalDataIsActive(Boolean isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public Long getTotalDataIsActive(Integer isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public Long getTotalDataIsActive(Byte isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public List<PasswordComplexity> getAllData() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public List<PasswordComplexity> getAllData(Boolean isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public List<PasswordComplexity> getAllData(Integer isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public List<PasswordComplexity> getAllData(Byte isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public List<PasswordComplexity> getAllDataPageAble(int firstResult, int maxResults, Order order) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public List<PasswordComplexity> getAllDataPageAbleIsActive(int firstResult, int maxResults, Order order, Boolean isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public List<PasswordComplexity> getAllDataPageAbleIsActive(int firstResult, int maxResults, Order order, Integer isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public List<PasswordComplexity> getAllDataPageAbleIsActive(int firstResult, int maxResults, Order order, Byte isActive) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
-    @Transactional(readOnly = true,propagation = Propagation.SUPPORTS,
-            isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS,
+            isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     public PasswordComplexity getByCode(String code) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.passwordComplexityDao.getByCode(code);
     }
-
+    
 }

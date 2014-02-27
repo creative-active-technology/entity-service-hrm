@@ -1,5 +1,5 @@
 package com.inkubator.hrm.entity;
-// Generated Feb 17, 2014 4:58:32 PM by Hibernate Tools 3.6.0
+// Generated Feb 27, 2014 10:10:16 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
     ,catalog="hrm"
 )
 public class LoginHistory  implements java.io.Serializable {
+
+
      private long id;
      private String userName;
      private Date loginDate;
@@ -101,11 +103,6 @@ public class LoginHistory  implements java.io.Serializable {
     
     public void setBahasa(String bahasa) {
         this.bahasa = bahasa;
-    }
-
-    @Override
-    public String toString() {
-        return "LoginHistory{" + "id=" + id + ", userName=" + userName + ", loginDate=" + loginDate + ", logOutDate=" + logOutDate + ", ipAddress=" + ipAddress + ", bahasa=" + bahasa + '}';
     }
 
 

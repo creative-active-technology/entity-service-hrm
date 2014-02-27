@@ -1,5 +1,5 @@
 package com.inkubator.hrm.entity;
-// Generated Feb 17, 2014 4:58:32 PM by Hibernate Tools 3.6.0
+// Generated Feb 27, 2014 10:10:16 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;

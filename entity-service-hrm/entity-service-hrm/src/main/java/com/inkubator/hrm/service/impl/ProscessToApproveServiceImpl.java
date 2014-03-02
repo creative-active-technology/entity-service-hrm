@@ -46,13 +46,20 @@ public class ProscessToApproveServiceImpl extends IServiceImpl implements Prosce
     }
 
     @Override
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void save(ProscessToApprove entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.proscessToApproveDao.save(entity);
     }
 
     @Override
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void update(ProscessToApprove entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ProscessToApprove proscessToApprove = this.proscessToApproveDao.getEntiyByPK(entity.getId());
+        proscessToApprove.setUpdatedBy(entity.getUpdatedBy());
+        proscessToApprove.setUpdatedOn(entity.getUpdatedOn());
+        proscessToApprove.setDescription(entity.getDescription());
+        proscessToApprove.setCode(entity.getCode());
+        this.proscessToApproveDao.update(proscessToApprove);
     }
 
     @Override

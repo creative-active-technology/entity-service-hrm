@@ -41,8 +41,9 @@ public class ProscessToApproveServiceImpl extends IServiceImpl implements Prosce
     }
 
     @Override
+    @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, timeout = 30)
     public ProscessToApprove getEntiyByPK(Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.proscessToApproveDao.getEntiyByPK(id);
     }
 
     @Override
@@ -128,8 +129,9 @@ public class ProscessToApproveServiceImpl extends IServiceImpl implements Prosce
     }
 
     @Override
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void delete(ProscessToApprove entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.proscessToApproveDao.delete(entity);
     }
 
     @Override

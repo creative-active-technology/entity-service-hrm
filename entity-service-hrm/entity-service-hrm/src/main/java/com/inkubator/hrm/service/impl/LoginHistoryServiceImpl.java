@@ -6,6 +6,7 @@
 package com.inkubator.hrm.service.impl;
 
 import com.inkubator.common.CommonUtilConstant;
+import com.inkubator.common.util.DateFormatter;
 import com.inkubator.common.util.DateTimeUtil;
 import com.inkubator.datacore.service.impl.IServiceImpl;
 import com.inkubator.hrm.dao.LoginHistoryDao;
@@ -201,10 +202,10 @@ public class LoginHistoryServiceImpl extends IServiceImpl implements LoginHistor
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS,
             isolation = Isolation.READ_COMMITTED, timeout = 30)
     public Long getToalLoginThisYear() throws Exception {
-        String tahun = new SimpleDateFormat("yyyy").format(new Date());
+        String tahun = DateFormatter.getDateAsStringsDefaultLocale(new Date(), CommonUtilConstant.DEFAULT_ONLY_YEAR_FORMAT);
         Date firtsYear = null;
         try {
-            firtsYear = new SimpleDateFormat("dd-MM-yyyy").parse("01-01-" + tahun);
+            firtsYear = DateFormatter.getDateWithDefaultLocale("01-01-" + tahun, CommonUtilConstant.DEFAULT_DATE_SHORT_PATTERN);
         } catch (ParseException ex) {
             LOGGER.error("Error", ex);
         }
@@ -217,8 +218,8 @@ public class LoginHistoryServiceImpl extends IServiceImpl implements LoginHistor
     public Long getTotalLoginThisMonth() throws Exception {
         Date firtsMonth = null;
         try {
-            String bulanTahun = new SimpleDateFormat("MM-yyyy").format(new Date());
-            firtsMonth = new SimpleDateFormat("dd-MM-yyyy").parse("1-" + bulanTahun);
+            String bulanTahun = DateFormatter.getDateAsStringsDefaultLocale(new Date(), CommonUtilConstant.DEFAULT_ONLY_YEAR_AND_MONTH_SHORT_FORMAT);
+            firtsMonth = DateFormatter.getDateWithDefaultLocale("01-" + bulanTahun, CommonUtilConstant.DEFAULT_DATE_SHORT_PATTERN);
         } catch (ParseException ex) {
             LOGGER.error("Error", ex);
         }
@@ -248,9 +249,9 @@ public class LoginHistoryServiceImpl extends IServiceImpl implements LoginHistor
             factorPengurang = -6;
         }
         if (factorPengurang == 0) {
-            String justDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+            String justDate = DateFormatter.getDateAsStringsDefaultLocale(new Date(), CommonUtilConstant.DEFAULT_DATE_SHORT_PATTERN);
             try {
-                firtstDateOfWeek = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").parse(justDate + " 00:00:00");
+                firtstDateOfWeek = DateFormatter.getDateWithDefaultLocale(justDate + " 00:00:00", CommonUtilConstant.DEFAULT_FULL_DATE_SHORT_PATTERN);
             } catch (ParseException ex) {
                 LOGGER.error("Error", ex);
             }
@@ -264,10 +265,10 @@ public class LoginHistoryServiceImpl extends IServiceImpl implements LoginHistor
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS,
             isolation = Isolation.READ_COMMITTED, timeout = 30)
     public Long getTotalLoginThisDay() throws Exception {
-        String justDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        String justDate = DateFormatter.getDateAsStringsDefaultLocale(new Date(), CommonUtilConstant.DEFAULT_DATE_SHORT_PATTERN);
         Date firstSeconThisDay = null;
         try {
-            firstSeconThisDay = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").parse(justDate + " 00:00:00");
+            firstSeconThisDay = DateFormatter.getDateWithDefaultLocale(justDate + " 00:00:00", CommonUtilConstant.DEFAULT_FULL_DATE_SHORT_PATTERN);
         } catch (ParseException ex) {
             LOGGER.error("Error", ex);
         }

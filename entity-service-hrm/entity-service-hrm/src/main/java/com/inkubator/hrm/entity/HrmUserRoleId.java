@@ -1,5 +1,5 @@
 package com.inkubator.hrm.entity;
-// Generated Feb 27, 2014 10:10:16 AM by Hibernate Tools 3.6.0
+// Generated Mar 6, 2014 12:14:43 PM by Hibernate Tools 3.6.0
 
 
 import javax.persistence.Column;

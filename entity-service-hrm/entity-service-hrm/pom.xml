@@ -37,12 +37,12 @@
         <dependency>
             <groupId>com.inkubator</groupId>
             <artifactId>data-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.inkubator</groupId>
             <artifactId>web-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0.RELEASE</version>
         </dependency>
     </dependencies>
 </project>

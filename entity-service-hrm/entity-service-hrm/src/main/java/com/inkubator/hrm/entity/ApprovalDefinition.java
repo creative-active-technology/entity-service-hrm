@@ -1,5 +1,5 @@
 package com.inkubator.hrm.entity;
-// Generated Feb 27, 2014 10:10:16 AM by Hibernate Tools 3.6.0
+// Generated Mar 6, 2014 12:14:43 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -27,10 +27,11 @@ import javax.persistence.Version;
 public class ApprovalDefinition  implements java.io.Serializable {
 
 
-     private long sequenceId;
+     private long id;
      private Integer version;
      private ProscessToApprove proscessToApprove;
      private String name;
+     private Integer sequence;
      private Integer minApprover;
      private Integer minRejector;
      private String approverType;
@@ -50,13 +51,14 @@ public class ApprovalDefinition  implements java.io.Serializable {
     }
 
 	
-    public ApprovalDefinition(long sequenceId) {
-        this.sequenceId = sequenceId;
+    public ApprovalDefinition(long id) {
+        this.id = id;
     }
-    public ApprovalDefinition(long sequenceId, ProscessToApprove proscessToApprove, String name, Integer minApprover, Integer minRejector, String approverType, String approverIndividual, String approverPosition, Integer allowOnBehalf, String onBehalfType, String onBehalfIndividual, String onBehalfPosition, String createdBy, Date createdOn, String updatedBy, Date updatedOn, Set<ApprovalActivity> approvalActivities) {
-       this.sequenceId = sequenceId;
+    public ApprovalDefinition(long id, ProscessToApprove proscessToApprove, String name, Integer sequence, Integer minApprover, Integer minRejector, String approverType, String approverIndividual, String approverPosition, Integer allowOnBehalf, String onBehalfType, String onBehalfIndividual, String onBehalfPosition, String createdBy, Date createdOn, String updatedBy, Date updatedOn, Set<ApprovalActivity> approvalActivities) {
+       this.id = id;
        this.proscessToApprove = proscessToApprove;
        this.name = name;
+       this.sequence = sequence;
        this.minApprover = minApprover;
        this.minRejector = minRejector;
        this.approverType = approverType;
@@ -76,13 +78,13 @@ public class ApprovalDefinition  implements java.io.Serializable {
      @Id 
 
     
-    @Column(name="sequence_id", unique=true, nullable=false)
-    public long getSequenceId() {
-        return this.sequenceId;
+    @Column(name="id", unique=true, nullable=false)
+    public long getId() {
+        return this.id;
     }
     
-    public void setSequenceId(long sequenceId) {
-        this.sequenceId = sequenceId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Version
@@ -113,6 +115,16 @@ public class ApprovalDefinition  implements java.io.Serializable {
     
     public void setName(String name) {
         this.name = name;
+    }
+
+    
+    @Column(name="sequence")
+    public Integer getSequence() {
+        return this.sequence;
+    }
+    
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
 
     
